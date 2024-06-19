@@ -1,5 +1,6 @@
+<?php $menu = 'buku_besar';
+include '../lib/komponen/wrap-top.php'; ?>
 <?php
-include '../config.php';
 
 // Fetch data from kas table with JOINs
 $sql = "SELECT k.id_kas_masuk, 
@@ -21,80 +22,68 @@ $result = $conn->query($sql);
 $saldo = 0;
 ?>
 
-<!DOCTYPE html>
-<html>
+<h1 class="h3 mb-3">Laporan Buku Besar</h1>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
 
-<head>
-    <title>Laporan Buku Besar</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+            </div>
+            <div class="card-body">
 
-        table,
-        th,
-        td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-        }
+                <table class="table table-striped table-bordered mt-4" id="table1">
+                    <thead>
+                        <tr class="text-center">
+                            <th>No</th>
+                            <th>Tanggal</th>
+                            <th>Keterangan Transaksi</th>
+                            <th>Debit</th>
+                            <th>Kredit</th>
+                            <th>Saldo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $no = 1; ?>
+                        <?php while ($row = $result->fetch_assoc()) : ?>
+                            <tr>
+                                <td><?php echo $no++; ?></td>
+                                <td><?php echo $row['tgl_tranksasi']; ?></td>
+                                <td><?php echo $row['keterangan_transaksi']; ?></td>
+                                <td>
+                                    <?php
+                                    if ($row['jenis_kas'] == 'masuk') {
+                                        $debit = $row['total'] ?? 0;
+                                        $kredit = 0;
+                                        $saldo += $debit;
+                                        echo number_format($debit, 2);
+                                    } else {
+                                        echo "";
+                                    }
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    if ($row['jenis_kas'] == 'keluar') {
+                                        $kredit = $row['total'] ?? 0;
+                                        $debit = 0;
+                                        $saldo -= $kredit;
+                                        echo number_format($kredit, 2);
+                                    } else {
+                                        echo "";
+                                    }
+                                    ?>
+                                </td>
+                                <td><?php echo number_format($saldo, 2); ?></td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
 
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
-</head>
 
-<body>
-    <h1>Laporan Buku Besar</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Tanggal</th>
-                <th>Keterangan Transaksi</th>
-                <th>Debit</th>
-                <th>Kredit</th>
-                <th>Saldo</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php $no = 1; ?>
-            <?php while ($row = $result->fetch_assoc()) : ?>
-                <tr>
-                    <td><?php echo $no++; ?></td>
-                    <td><?php echo $row['tgl_tranksasi']; ?></td>
-                    <td><?php echo $row['keterangan_transaksi']; ?></td>
-                    <td>
-                        <?php
-                        if ($row['jenis_kas'] == 'masuk') {
-                            $debit = $row['total'] ?? 0;
-                            $kredit = 0;
-                            $saldo += $debit;
-                            echo number_format($debit, 2);
-                        } else {
-                            echo "0.00";
-                        }
-                        ?>
-                    </td>
-                    <td>
-                        <?php
-                        if ($row['jenis_kas'] == 'keluar') {
-                            $kredit = $row['total'] ?? 0;
-                            $debit = 0;
-                            $saldo -= $kredit;
-                            echo number_format($kredit, 2);
-                        } else {
-                            echo "0.00";
-                        }
-                        ?>
-                    </td>
-                    <td><?php echo number_format($saldo, 2); ?></td>
-                </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
-</body>
 
-</html>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php include '../lib/komponen/wrap-bottom.php'; ?>

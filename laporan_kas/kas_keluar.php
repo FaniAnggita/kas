@@ -1,4 +1,4 @@
-<?php $menu = 'kas_masuk';
+<?php $menu = 'kas_keluar';
 include '../lib/komponen/wrap-top.php'; ?>
 <?php
 
@@ -26,12 +26,13 @@ $sql = "SELECT k.id_kas_masuk,
         LEFT JOIN penjualan p ON k.id_penjualan = p.id_penjualan
         LEFT JOIN pembelian pe ON k.id_pembelian = pe.id_pembelian
         LEFT JOIN biaya b ON k.id_biaya = b.id_biaya
+        WHERE k .jenis_kas = 'keluar'
         ORDER BY k.tgl_tranksasi DESC";
 
 $result = $conn->query($sql);
 ?>
 
-<h1 class="h3 mb-3">Laporan Kas Masuk</h1>
+<h1 class="h3 mb-3">Laporan Kas Keluar</h1>
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -47,7 +48,7 @@ $result = $conn->query($sql);
                             <th>Keterangan Transaksi</th>
                             <th>Jenis Kas</th>
                             <th>Harga</th>
-                            <th>Quantity</th>
+                            <!-- <th>Quantity</th> -->
                             <th>Total</th>
                         </tr>
                     </thead>
@@ -57,7 +58,7 @@ $result = $conn->query($sql);
                             <tr>
                                 <td><?php echo $no++; ?></td>
                                 <td><?php echo $row['keterangan_transaksi']; ?></td>
-                                <td><?php echo $row['jenis_kas']; ?></td>
+                                <!-- <td><?php echo $row['jenis_kas']; ?></td> -->
                                 <td><?php echo isset($row['harga']) ? number_format($row['harga'], 2) : ''; ?></td>
                                 <td><?php echo isset($row['quantity']) ? $row['quantity'] : ''; ?></td>
                                 <td><?php echo isset($row['total']) ? number_format($row['total'], 2) : ''; ?></td>

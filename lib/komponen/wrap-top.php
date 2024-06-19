@@ -87,25 +87,25 @@ if (!isset($_SESSION['user_id'])) {
 
                     <li class="sidebar-item <?php echo $menu === 'dashboard' ? 'active' : ''; ?>">
                         <a class="sidebar-link" href="../dashboard">
-                            <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+                            <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Dashboard</span>
                         </a>
                     </li>
 
                     <li class="sidebar-item <?php echo $menu === 'pembelian' ? 'active' : ''; ?>">
                         <a class="sidebar-link" href="../pembelian">
-                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Pembelian</span>
+                            <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Pembelian</span>
                         </a>
                     </li>
 
                     <li class="sidebar-item <?php echo $menu === 'penjualan' ? 'active' : ''; ?>">
                         <a class="sidebar-link" href="../penjualan">
-                            <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Penjualan</span>
+                            <i class="align-middle" data-feather="log-out"></i> <span class="align-middle">Penjualan</span>
                         </a>
                     </li>
 
                     <li class="sidebar-item <?php echo $menu === 'biaya' ? 'active' : ''; ?>">
                         <a class="sidebar-link" href="../biaya">
-                            <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Pembiayaan</span>
+                            <i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">Pembiayaan</span>
                         </a>
                     </li>
 
@@ -114,20 +114,20 @@ if (!isset($_SESSION['user_id'])) {
                     </li>
 
                     <li class="sidebar-item <?php echo $menu === 'kas_masuk' ? 'active' : ''; ?>">
-                        <a class="sidebar-link" href="../laporan_kas">
-                            <i class="align-middle" data-feather="square"></i> <span class="align-middle">Kas Masuk</span>
+                        <a class="sidebar-link" href="../laporan_kas/kas_masuk.php">
+                            <i class="align-middle" data-feather="arrow-down-circle"></i> <span class="align-middle">Kas Masuk</span>
                         </a>
                     </li>
 
                     <li class="sidebar-item <?php echo $menu === 'kas_keluar' ? 'active' : ''; ?>">
-                        <a class="sidebar-link" href="../kas">
-                            <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Kas Keluar</span>
+                        <a class="sidebar-link" href="../laporan_kas/kas_keluar.php">
+                            <i class="align-middle" data-feather="arrow-up-circle"></i> <span class="align-middle">Kas Keluar</span>
                         </a>
                     </li>
 
                     <li class="sidebar-item <?php echo $menu === 'buku_besar' ? 'active' : ''; ?>">
                         <a class="sidebar-link" href="../buku_besar">
-                            <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Buku Besar</span>
+                            <i class="align-middle" data-feather="table"></i> <span class="align-middle">Buku Besar</span>
                         </a>
                     </li>
                     <li class="sidebar-header">
@@ -135,13 +135,13 @@ if (!isset($_SESSION['user_id'])) {
                     </li>
 
                     <li class="sidebar-item <?php echo $menu === 'pengguna' ? 'active' : ''; ?>">
-                        <a class="sidebar-link" href="ui-buttons.html">
-                            <i class="align-middle" data-feather="square"></i> <span class="align-middle">Daftar Pengguna</span>
+                        <a class="sidebar-link" href="../autentikasi/pengguna.php">
+                            <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Daftar Pengguna</span>
                         </a>
                     </li>
                     <li class="sidebar-item <?php echo $menu === 'sandi' ? 'active' : ''; ?>">
-                        <a class="sidebar-link" href="ui-buttons.html">
-                            <i class="align-middle" data-feather="square"></i> <span class="align-middle">Daftar Pengguna</span>
+                        <a class="sidebar-link" href="../autentikasi/ganti_password.php">
+                            <i class="align-middle" data-feather="key"></i> <span class="align-middle">Profil</span>
                         </a>
                     </li>
 
@@ -167,10 +167,11 @@ if (!isset($_SESSION['user_id'])) {
                             </a>
 
                             <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                                <span class="text-dark">Halo, Admin</span>
+                                <span class="text-dark">Halo, <?= $_SESSION['nama'] ?></span>
+
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Ganti Password</a>
+                                <a class="dropdown-item" href="../autentikasi/ganti_password.php"><i class="align-middle me-1" data-feather="user"></i> Ganti Password</a>
                                 <div class="dropdown-divider"></div>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="../autentikasi/logout.php">Log out</a>

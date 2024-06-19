@@ -67,7 +67,7 @@ $total_keluar_transactions = $row_total_keluar['total_keluar_transactions'] ?? 0
 
 								<div class="col-auto">
 									<div class="stat text-primary">
-										<i class="align-middle" data-feather="truck"></i>
+										<i class="align-middle" data-feather="log-in"></i>
 									</div>
 								</div>
 							</div>
@@ -86,7 +86,7 @@ $total_keluar_transactions = $row_total_keluar['total_keluar_transactions'] ?? 0
 
 								<div class="col-auto">
 									<div class="stat text-primary">
-										<i class="align-middle" data-feather="users"></i>
+										<i class="align-middle" data-feather="arrow-down-circle"></i>
 									</div>
 								</div>
 							</div>
@@ -105,7 +105,7 @@ $total_keluar_transactions = $row_total_keluar['total_keluar_transactions'] ?? 0
 
 								<div class="col-auto">
 									<div class="stat text-primary">
-										<i class="align-middle" data-feather="dollar-sign"></i>
+										<i class="align-middle" data-feather="shopping-bag"></i>
 									</div>
 								</div>
 							</div>
@@ -125,7 +125,7 @@ $total_keluar_transactions = $row_total_keluar['total_keluar_transactions'] ?? 0
 
 								<div class="col-auto">
 									<div class="stat text-primary">
-										<i class="align-middle" data-feather="dollar-sign"></i>
+										<i class="align-middle" data-feather="log-out"></i>
 									</div>
 								</div>
 							</div>
@@ -143,7 +143,7 @@ $total_keluar_transactions = $row_total_keluar['total_keluar_transactions'] ?? 0
 
 								<div class="col-auto">
 									<div class="stat text-primary">
-										<i class="align-middle" data-feather="dollar-sign"></i>
+										<i class="align-middle" data-feather="arrow-up-circle"></i>
 									</div>
 								</div>
 							</div>
@@ -161,7 +161,7 @@ $total_keluar_transactions = $row_total_keluar['total_keluar_transactions'] ?? 0
 
 								<div class="col-auto">
 									<div class="stat text-primary">
-										<i class="align-middle" data-feather="users"></i>
+										<i class="align-middle" data-feather="table"></i>
 									</div>
 								</div>
 							</div>
