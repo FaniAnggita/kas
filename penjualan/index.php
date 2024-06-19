@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_penjualan'])) {
 
         $sql_kas = "INSERT INTO kas (id_penjualan, keterangan_transaksi, jenis_kas, tgl_tranksasi) VALUES ('$last_id', '$keterangan_transaksi', '$jenis_kas', '$tgl_transaksi')";
         if ($conn->query($sql_kas) === TRUE) {
-            echo "Penjualan added successfully";
+            echo "<script>alert('Data berhasil ditambahkan!')</script>";
         } else {
             echo "Error: " . $sql_kas . "<br>" . $conn->error;
         }

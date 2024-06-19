@@ -108,6 +108,11 @@ if (!isset($_SESSION['user_id'])) {
                             <i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">Pembiayaan</span>
                         </a>
                     </li>
+                    <li class="sidebar-item <?php echo $menu === 'supplier' ? 'active' : ''; ?>">
+                        <a class="sidebar-link" href="../supplier">
+                            <i class="align-middle" data-feather="truck"></i> <span class="align-middle">Supplier</span>
+                        </a>
+                    </li>
 
                     <li class="sidebar-header">
                         Laporan-laporan
@@ -130,15 +135,24 @@ if (!isset($_SESSION['user_id'])) {
                             <i class="align-middle" data-feather="table"></i> <span class="align-middle">Buku Besar</span>
                         </a>
                     </li>
+                    <li class="sidebar-item <?php echo $menu === 'laba_rugi' ? 'active' : ''; ?>">
+                        <a class="sidebar-link" href="../laba_rugi">
+                            <i class="align-middle" data-feather="bar-chart"></i> <span class="align-middle">Laba/Rugi</span>
+                        </a>
+                    </li>
                     <li class="sidebar-header">
                         Kelola Pengguna
                     </li>
 
-                    <li class="sidebar-item <?php echo $menu === 'pengguna' ? 'active' : ''; ?>">
-                        <a class="sidebar-link" href="../autentikasi/pengguna.php">
-                            <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Daftar Pengguna</span>
-                        </a>
-                    </li>
+                    <?php
+                    if ($_SESSION['jabatan'] != 'owner') { ?>
+                        <li class="sidebar-item <?php echo $menu === 'pengguna' ? 'active' : ''; ?>">
+                            <a class="sidebar-link" href="../autentikasi/pengguna.php">
+                                <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Daftar Pengguna</span>
+                            </a>
+                        </li>
+                    <?php  } ?>
+
                     <li class="sidebar-item <?php echo $menu === 'sandi' ? 'active' : ''; ?>">
                         <a class="sidebar-link" href="../autentikasi/ganti_password.php">
                             <i class="align-middle" data-feather="key"></i> <span class="align-middle">Profil</span>
@@ -174,7 +188,7 @@ if (!isset($_SESSION['user_id'])) {
                                 <a class="dropdown-item" href="../autentikasi/ganti_password.php"><i class="align-middle me-1" data-feather="user"></i> Ganti Password</a>
                                 <div class="dropdown-divider"></div>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="../autentikasi/logout.php">Log out</a>
+                                <a class="dropdown-item" href="../autentikasi/logout.php">Keluar</a>
                             </div>
                         </li>
                     </ul>

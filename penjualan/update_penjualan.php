@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_penjualan'])) {
                     </div>
                     <div class="d-flex justify-content-between">
                         <button type="submit" name="update_penjualan" class="btn btn-primary">Update</button>
-                        <button type="button" class="btn btn-secondary" onclick="window.location.href='your-cancel-url-here';">Batal</button>
+                        <button type="button" class="btn btn-secondary" onclick="window.location.href='index.php';">Batal</button>
                     </div>
                 </form>
             </div>

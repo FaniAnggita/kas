@@ -1,6 +1,6 @@
+<?php $menu = 'supplier';
+include '../lib/komponen/wrap-top.php'; ?>
 <?php
-include '../config.php';
-
 $id = $_GET['id'];
 
 // Fetch supplier data
@@ -14,30 +14,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_supplier'])) {
 
     $sql = "UPDATE supplier SET nama_supplier = '$nama', no_telfon = '$telp', alamat = '$alamat' WHERE id_supplier = $id";
     if ($conn->query($sql) === TRUE) {
-        echo "Supplier updated successfully";
-        header('Location: index.php');
+        echo "<script>alert('Data berhasil diperbarui')</script>";
+        echo "<script>window.location.href='index.php'</script>";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
 }
 ?>
 
-<!DOCTYPE html>
-<html>
 
-<head>
-    <title>Edit Supplier</title>
-</head>
 
-<body>
-    <h1>Edit Supplier</h1>
-    <a href="supplier.php">Kembali ke Data Supplier</a>
-    <form method="post" action="">
-        Nama Supplier: <input type="text" name="nama_supplier" value="<?php echo $supplier['nama_supplier']; ?>" required><br>
-        No Telfon: <input type="text" name="no_telfon" value="<?php echo $supplier['no_telfon']; ?>" required><br>
-        Alamat: <textarea name="alamat" required><?php echo $supplier['alamat']; ?></textarea><br>
-        <input type="submit" name="update_supplier" value="Update">
-    </form>
-</body>
+<h1 class="h3 mb-3">Edit Supplier</h1>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="" class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label for="nama_supplier" class="form-label">Nama Supplier:</label>
+                        <input type="text" name="nama_supplier" id="nama_supplier" class="form-control" value="<?php echo $supplier['nama_supplier']; ?>" required>
+                        <div class="invalid-feedback">Nama supplier harus diisi.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="no_telfon" class="form-label">No Telfon:</label>
+                        <input type="text" name="no_telfon" id="no_telfon" class="form-control" value="<?php echo $supplier['no_telfon']; ?>" required>
+                        <div class="invalid-feedback">No telfon harus diisi.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="alamat" class="form-label">Alamat:</label>
+                        <textarea name="alamat" id="alamat" class="form-control" required><?php echo $supplier['alamat']; ?></textarea>
+                        <div class="invalid-feedback">Alamat harus diisi.</div>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" name="update_supplier" class="btn btn-primary">Update</button>
+                        <a href="index.php" class="btn btn-secondary">Batal</a>
+                    </div>
+                </form>
 
-</html>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php include '../lib/komponen/wrap-bottom.php'; ?>
