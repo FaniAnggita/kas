@@ -1,4 +1,5 @@
-<?php include '../lib/komponen/wrap-top.php';
+<?php $menu = 'dashboard';
+include '../lib/komponen/wrap-top.php';
 // Fetch total kas masuk
 $sql_masuk = "SELECT SUM(p.harga * p.quantity) AS total_masuk 
               FROM kas k

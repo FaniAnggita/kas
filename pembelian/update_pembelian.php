@@ -1,6 +1,6 @@
+<?php $menu = 'pembelian';
+include '../lib/komponen/wrap-top.php'; ?>
 <?php
-include '../config.php';
-
 $id = $_GET['id'];
 
 // Fetch pembelian data
@@ -25,8 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_pembelian'])) {
 
         $sql_kas = "UPDATE kas SET keterangan_transaksi = '$keterangan_transaksi', jenis_kas = '$jenis_kas', tgl_tranksasi = '$tgl_transaksi' WHERE id_pembelian = $id";
         if ($conn->query($sql_kas) === TRUE) {
-            echo "Pembelian updated successfully";
-            header('Location: index.php');
+            echo "<script>alert('Data berhasil diperbarui')</script>";
+            echo "<script>window.location.href='index.php'</script>";
         } else {
             echo "Error: " . $sql_kas . "<br>" . $conn->error;
         }
@@ -36,31 +36,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_pembelian'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html>
 
-<head>
-    <title>Edit Pembelian</title>
-</head>
 
-<body>
-    <h1>Edit Pembelian</h1>
-    <a href="pembelian.php">Kembali ke Data Pembelian</a>
-    <form method="post" action="">
-        Supplier:
-        <select name="id_supplier" required>
-            <?php while ($row = $suppliers->fetch_assoc()) : ?>
-                <option value="<?php echo $row['id_supplier']; ?>" <?php if ($row['id_supplier'] == $pembelian['id_supplier']) echo 'selected'; ?>>
-                    <?php echo $row['nama_supplier']; ?>
-                </option>
-            <?php endwhile; ?>
-        </select><br>
-        Keterangan Pembelian: <input type="text" name="keterangan_pembelian" value="<?php echo $pembelian['keterangan_pembelian']; ?>" required><br>
-        Tanggal Beli: <input type="date" name="tanggal_beli" value="<?php echo $pembelian['tanggal_beli']; ?>" required><br>
-        Harga: <input type="number" name="harga" value="<?php echo $pembelian['harga']; ?>" required><br>
-        Quantity: <input type="number" name="quantity" value="<?php echo $pembelian['quantity']; ?>" required><br>
-        <input type="submit" name="update_pembelian" value="Update">
-    </form>
-</body>
+<h1 class="h3 mb-3">Edit Pembelian</h1>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
 
-</html>
+            <div class="card-body">
+                <form method="post" action="" class="form-horizontal">
+                    <div class="mb-3">
+                        <label for="id_supplier" class="form-label">Supplier:</label>
+                        <select name="id_supplier" id="id_supplier" class="form-select" required>
+                            <?php while ($row = $suppliers->fetch_assoc()) : ?>
+                                <option value="<?php echo $row['id_supplier']; ?>" <?php if ($row['id_supplier'] == $pembelian['id_supplier']) echo 'selected'; ?>>
+                                    <?php echo $row['nama_supplier']; ?>
+                                </option>
+                            <?php endwhile; ?>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="keterangan_pembelian" class="form-label">Keterangan Pembelian:</label>
+                        <input type="text" name="keterangan_pembelian" id="keterangan_pembelian" value="<?php echo $pembelian['keterangan_pembelian']; ?>" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tanggal_beli" class="form-label">Tanggal Beli:</label>
+                        <input type="date" name="tanggal_beli" id="tanggal_beli" value="<?php echo $pembelian['tanggal_beli']; ?>" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="harga" class="form-label">Harga:</label>
+                        <input type="number" name="harga" id="harga" value="<?php echo $pembelian['harga']; ?>" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">Quantity:</label>
+                        <input type="number" name="quantity" id="quantity" value="<?php echo $pembelian['quantity']; ?>" class="form-control" required>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" name="update_pembelian" class="btn btn-primary">Update</button>
+                        <button type="button" class="btn btn-secondary" onclick="window.location.href='index.php';">Batal</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php include '../lib/komponen/wrap-bottom.php'; ?>

@@ -1,6 +1,6 @@
+<?php $menu = 'penjualan';
+include '../lib/komponen/wrap-top.php'; ?>
 <?php
-include '../config.php';
-
 $id = $_GET['id'];
 
 // Fetch penjualan data
@@ -23,8 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_penjualan'])) {
 
         $sql_kas = "UPDATE kas SET keterangan_transaksi = '$keterangan_transaksi', jenis_kas = '$jenis_kas', tgl_tranksasi = '$tgl_transaksi' WHERE id_penjualan = $id";
         if ($conn->query($sql_kas) === TRUE) {
-            echo "Penjualan updated successfully";
-            header('Location: index.php');
+            echo "<script>alert('Data berhasil diperbarui')</script>";
+            echo "<script>window.location.href='index.php'</script>";
         } else {
             echo "Error: " . $sql_kas . "<br>" . $conn->error;
         }
@@ -34,23 +34,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_penjualan'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html>
 
-<head>
-    <title>Edit Penjualan</title>
-</head>
 
-<body>
-    <h1>Edit Penjualan</h1>
-    <a href="penjualan.php">Kembali ke Data Penjualan</a>
-    <form method="post" action="">
-        Keterangan Penjualan: <input type="text" name="keterangan_penjualan" value="<?php echo $penjualan['keterangan_penjualan']; ?>" required><br>
-        Tanggal Jual: <input type="date" name="tgl_jual" value="<?php echo $penjualan['tgl_jual']; ?>" required><br>
-        Harga: <input type="number" name="harga" value="<?php echo $penjualan['harga']; ?>" required><br>
-        Quantity: <input type="number" name="quantity" value="<?php echo $penjualan['quantity']; ?>" required><br>
-        <input type="submit" name="update_penjualan" value="Update">
-    </form>
-</body>
+<h1 class="h3 mb-3">Edit Penjualan</h1>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="" class="form-horizontal">
+                    <div class="mb-3">
+                        <label for="keterangan_penjualan" class="form-label">Keterangan Penjualan:</label>
+                        <input type="text" name="keterangan_penjualan" id="keterangan_penjualan" value="<?php echo $penjualan['keterangan_penjualan']; ?>" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tgl_jual" class="form-label">Tanggal Jual:</label>
+                        <input type="date" name="tgl_jual" id="tgl_jual" value="<?php echo $penjualan['tgl_jual']; ?>" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="harga" class="form-label">Harga:</label>
+                        <input type="number" name="harga" id="harga" value="<?php echo $penjualan['harga']; ?>" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">Quantity:</label>
+                        <input type="number" name="quantity" id="quantity" value="<?php echo $penjualan['quantity']; ?>" class="form-control" required>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" name="update_penjualan" class="btn btn-primary">Update</button>
+                        <button type="button" class="btn btn-secondary" onclick="window.location.href='your-cancel-url-here';">Batal</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-</html>
+<?php include '../lib/komponen/wrap-bottom.php'; ?>

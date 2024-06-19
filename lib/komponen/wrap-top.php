@@ -21,15 +21,17 @@ if (!isset($_SESSION['user_id'])) {
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="shortcut icon" href="../lib/img/icons/icon-48x48.png" />
 
-    <link rel="canonical" href="https://demo-basic.adminkit.io/" />
+    <!-- <link rel="canonical" href="https://demo-basic.adminkit.io/" /> -->
 
-    <title>Sistem Informasi Pencatatan Kas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+
 
     <link href="../lib/css/app.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+    <title>Sistem Informasi Pencatatan Kas</title>
     <style>
         .chart-container {
             width: 80%;
@@ -65,6 +67,8 @@ if (!isset($_SESSION['user_id'])) {
             font-size: 18px;
         }
     </style>
+
+
 </head>
 
 <body>
@@ -81,25 +85,25 @@ if (!isset($_SESSION['user_id'])) {
                         Umum
                     </li>
 
-                    <li class="sidebar-item active">
+                    <li class="sidebar-item <?php echo $menu === 'dashboard' ? 'active' : ''; ?>">
                         <a class="sidebar-link" href="../dashboard">
                             <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item">
+                    <li class="sidebar-item <?php echo $menu === 'pembelian' ? 'active' : ''; ?>">
                         <a class="sidebar-link" href="../pembelian">
                             <i class="align-middle" data-feather="user"></i> <span class="align-middle">Pembelian</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item">
+                    <li class="sidebar-item <?php echo $menu === 'penjualan' ? 'active' : ''; ?>">
                         <a class="sidebar-link" href="../penjualan">
                             <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Penjualan</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item">
+                    <li class="sidebar-item <?php echo $menu === 'biaya' ? 'active' : ''; ?>">
                         <a class="sidebar-link" href="../biaya">
                             <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Pembiayaan</span>
                         </a>
@@ -109,19 +113,19 @@ if (!isset($_SESSION['user_id'])) {
                         Laporan-laporan
                     </li>
 
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="../kas">
+                    <li class="sidebar-item <?php echo $menu === 'kas_masuk' ? 'active' : ''; ?>">
+                        <a class="sidebar-link" href="../laporan_kas">
                             <i class="align-middle" data-feather="square"></i> <span class="align-middle">Kas Masuk</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item">
+                    <li class="sidebar-item <?php echo $menu === 'kas_keluar' ? 'active' : ''; ?>">
                         <a class="sidebar-link" href="../kas">
                             <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Kas Keluar</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item">
+                    <li class="sidebar-item <?php echo $menu === 'buku_besar' ? 'active' : ''; ?>">
                         <a class="sidebar-link" href="../buku_besar">
                             <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Buku Besar</span>
                         </a>
@@ -130,12 +134,14 @@ if (!isset($_SESSION['user_id'])) {
                         Kelola Pengguna
                     </li>
 
-                    <li class="sidebar-item">
+                    <li class="sidebar-item <?php echo $menu === 'pengguna' ? 'active' : ''; ?>">
                         <a class="sidebar-link" href="ui-buttons.html">
                             <i class="align-middle" data-feather="square"></i> <span class="align-middle">Daftar Pengguna</span>
                         </a>
+                    </li>
+                    <li class="sidebar-item <?php echo $menu === 'sandi' ? 'active' : ''; ?>">
                         <a class="sidebar-link" href="ui-buttons.html">
-                            <i class="align-middle" data-feather="square"></i> <span class="align-middle">Ganti Sandi</span>
+                            <i class="align-middle" data-feather="square"></i> <span class="align-middle">Daftar Pengguna</span>
                         </a>
                     </li>
 

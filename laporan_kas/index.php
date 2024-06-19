@@ -1,5 +1,6 @@
+<?php $menu = 'kas_masuk';
+include '../lib/komponen/wrap-top.php'; ?>
 <?php
-include '../config.php';
 
 // Fetch data from kas table with JOINs
 $sql = "SELECT k.id_kas_masuk, 
@@ -30,58 +31,46 @@ $sql = "SELECT k.id_kas_masuk,
 $result = $conn->query($sql);
 ?>
 
-<!DOCTYPE html>
-<html>
+<h1 class="h3 mb-3">Laporan Kas Masuk</h1>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
 
-<head>
-    <title>Detail Tabel Kas</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+            </div>
+            <div class="card-body">
 
-        table,
-        th,
-        td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-        }
+                <table class="table table-striped table-bordered mt-4" id="table1">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Keterangan Transaksi</th>
+                            <th>Jenis Kas</th>
+                            <th>Harga</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $no = 1; ?>
+                        <?php while ($row = $result->fetch_assoc()) : ?>
+                            <tr>
+                                <td><?php echo $no++; ?></td>
+                                <td><?php echo $row['keterangan_transaksi']; ?></td>
+                                <td><?php echo $row['jenis_kas']; ?></td>
+                                <td><?php echo isset($row['harga']) ? number_format($row['harga'], 2) : ''; ?></td>
+                                <td><?php echo isset($row['quantity']) ? $row['quantity'] : ''; ?></td>
+                                <td><?php echo isset($row['total']) ? number_format($row['total'], 2) : ''; ?></td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
 
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
-</head>
 
-<body>
-    <h1>Detail Tabel Kas</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Keterangan Transaksi</th>
-                <th>Jenis Kas</th>
-                <th>Harga</th>
-                <th>Quantity</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php $no = 1; ?>
-            <?php while ($row = $result->fetch_assoc()) : ?>
-                <tr>
-                    <td><?php echo $no++; ?></td>
-                    <td><?php echo $row['keterangan_transaksi']; ?></td>
-                    <td><?php echo $row['jenis_kas']; ?></td>
-                    <td><?php echo isset($row['harga']) ? number_format($row['harga'], 2) : ''; ?></td>
-                    <td><?php echo isset($row['quantity']) ? $row['quantity'] : ''; ?></td>
-                    <td><?php echo isset($row['total']) ? number_format($row['total'], 2) : ''; ?></td>
-                </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
-</body>
 
-</html>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php include '../lib/komponen/wrap-bottom.php'; ?>

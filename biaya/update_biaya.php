@@ -1,5 +1,6 @@
+<?php $menu = 'biaya';
+include '../lib/komponen/wrap-top.php'; ?>
 <?php
-include '../config.php';
 
 $id = $_GET['id'];
 
@@ -22,8 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_biaya'])) {
 
         $sql_kas = "UPDATE kas SET keterangan_transaksi = '$keterangan_transaksi', jenis_kas = '$jenis_kas', tgl_tranksasi = '$tgl_transaksi' WHERE id_biaya = $id";
         if ($conn->query($sql_kas) === TRUE) {
-            echo "Biaya updated successfully";
-            header('Location: index.php');
+            echo "<script>alert('Data berhasil diperbarui')</script>";
+            echo "<script>window.location.href='index.php'</script>";
         } else {
             echo "Error: " . $sql_kas . "<br>" . $conn->error;
         }
@@ -33,22 +34,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_biaya'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html>
 
-<head>
-    <title>Edit Biaya</title>
-</head>
 
-<body>
-    <h1>Edit Biaya</h1>
-    <a href="biaya.php">Kembali ke Data Biaya</a>
-    <form method="post" action="">
-        Keterangan Biaya: <input type="text" name="keterangan_biaya" value="<?php echo $biaya['keterangan_biaya']; ?>" required><br>
-        Tanggal Biaya: <input type="date" name="tgl_biaya" value="<?php echo $biaya['tgl_biaya']; ?>" required><br>
-        Nominal Biaya: <input type="number" name="nominal_biaya" value="<?php echo $biaya['nominal_biaya']; ?>" required><br>
-        <input type="submit" name="update_biaya" value="Update">
-    </form>
-</body>
+<h1 class="h3 mb-3">Edit Pembiayaan</h1>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title mb-4">Form Update Biaya</h2>
+                <form method="post" action="" class="form-horizontal">
+                    <div class="mb-3">
+                        <label for="keterangan_biaya" class="form-label">Keterangan Biaya:</label>
+                        <input type="text" name="keterangan_biaya" id="keterangan_biaya" value="<?php echo $biaya['keterangan_biaya']; ?>" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tgl_biaya" class="form-label">Tanggal Biaya:</label>
+                        <input type="date" name="tgl_biaya" id="tgl_biaya" value="<?php echo $biaya['tgl_biaya']; ?>" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nominal_biaya" class="form-label">Nominal Biaya:</label>
+                        <input type="number" name="nominal_biaya" id="nominal_biaya" value="<?php echo $biaya['nominal_biaya']; ?>" class="form-control" required>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" name="update_biaya" class="btn btn-primary">Update</button>
+                        <button type="button" class="btn btn-secondary" onclick="window.location.href='index.php';">Batal</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-</html>
+    </div>
+</div>
+
+<?php include '../lib/komponen/wrap-bottom.php'; ?>
