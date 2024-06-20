@@ -83,7 +83,6 @@ $total_keluar_transactions = $row_total_keluar['total_keluar_transactions'] ?? 0
 								<div class="col mt-0">
 									<h5 class="card-title">Jumlah Kas Masuk</h5>
 								</div>
-
 								<div class="col-auto">
 									<div class="stat text-primary">
 										<i class="align-middle" data-feather="arrow-down-circle"></i>
@@ -204,7 +203,7 @@ $total_keluar_transactions = $row_total_keluar['total_keluar_transactions'] ?? 0
 
 			const ctx = document.getElementById('penjualanChart').getContext('2d');
 			const penjualanChart = new Chart(ctx, {
-				type: 'bar',
+				type: 'line',
 				data: {
 					labels: labels,
 					datasets: [{

@@ -3,8 +3,8 @@ include '../lib/komponen/wrap-top.php'; ?>
 <?php
 $tanggalAwal = '';
 $tanggalAkhir = '';
-$total_pendapatan = 0;
-$total_biaya = 0;
+$balance = 0;
+$total_pengeluaran = 0;
 $total_laba_rugi = 0;
 $keterangan = "";
 
@@ -17,27 +17,42 @@ if (isset($_POST['submit'])) {
     $tanggalAwal = $_POST['tanggalAwal'];
     $tanggalAkhir = $_POST['tanggalAkhir'];
 
-    // Query untuk menghitung total pendapatan dari tabel penjualan berdasarkan rentang tanggal
-    $sql_total_pendapatan = "SELECT SUM(p.harga * p.quantity) AS total_pendapatan 
-                             FROM kas k
-                             LEFT JOIN penjualan p ON k.id_penjualan = p.id_penjualan
-                             WHERE k.jenis_kas = 'masuk' AND p.tgl_jual BETWEEN '$tanggalAwal' AND '$tanggalAkhir'";
-    $result_total_pendapatan = $conn->query($sql_total_pendapatan);
-    $row_total_pendapatan = $result_total_pendapatan->fetch_assoc();
-    $total_pendapatan = $row_total_pendapatan['total_pendapatan'] ?? 0;
+    $total_pengeluaran = $totalGaji +  $totalListrikAir +  $totalOngkosBarang;
+    // Fetch total kas masuk
+    $sql_masuk = "SELECT SUM(p.harga * p.quantity) AS total_masuk 
+    FROM kas k
+    LEFT JOIN penjualan p ON k.id_penjualan = p.id_penjualan
+    WHERE k.jenis_kas = 'masuk'";
+    $result_masuk = $conn->query($sql_masuk);
+    $row_masuk = $result_masuk->fetch_assoc();
+    $total_masuk = $row_masuk['total_masuk'] ?? 0;
 
-    // Query untuk menghitung total biaya (total keluar)
-    $sql_total_biaya = "SELECT SUM(COALESCE(pe.harga * pe.quantity, 0) + COALESCE(b.nominal_biaya * b.quantity, 0)) AS total_biaya
-                        FROM kas k
-                        LEFT JOIN pembelian pe ON k.id_pembelian = pe.id_pembelian AND k.jenis_kas = 'keluar'
-                        LEFT JOIN biaya b ON k.id_biaya = b.id_biaya AND k.jenis_kas = 'keluar'
-                        WHERE (pe.tanggal_beli BETWEEN '$tanggalAwal' AND '$tanggalAkhir' OR b.tgl_biaya BETWEEN '$tanggalAwal' AND '$tanggalAkhir')";
-    $result_total_biaya = $conn->query($sql_total_biaya);
-    $row_total_biaya = $result_total_biaya->fetch_assoc();
-    $total_biaya = $row_total_biaya['total_biaya'] ?? 0;
+    // Fetch total kas keluar from pembelian and biaya
+    $sql_keluar_pembelian = "SELECT SUM(pe.harga * pe.quantity) AS total_keluar_pembelian
+           FROM kas k
+           LEFT JOIN pembelian pe ON k.id_pembelian = pe.id_pembelian
+           WHERE k.jenis_kas = 'keluar' AND k.id_pembelian IS NOT NULL AND
+           k.tgl_tranksasi BETWEEN '$tanggalAwal' AND '$tanggalAkhir' OR k.tgl_tranksasi BETWEEN '$tanggalAwal' AND '$tanggalAkhir'";
+    $result_keluar_pembelian = $conn->query($sql_keluar_pembelian);
+    $row_keluar_pembelian = $result_keluar_pembelian->fetch_assoc();
+    $total_keluar_pembelian = $row_keluar_pembelian['total_keluar_pembelian'] ?? 0;
+
+    $sql_keluar_biaya = "SELECT SUM(b.nominal_biaya * b.quantity) AS total_keluar_biaya
+       FROM kas k
+       LEFT JOIN biaya b ON k.id_biaya = b.id_biaya
+       WHERE k.jenis_kas = 'keluar' AND k.id_biaya IS NOT NULL AND
+           k.tgl_tranksasi BETWEEN '$tanggalAwal' AND '$tanggalAkhir' OR k.tgl_tranksasi BETWEEN '$tanggalAwal' AND '$tanggalAkhir'";
+    $result_keluar_biaya = $conn->query($sql_keluar_biaya);
+    $row_keluar_biaya = $result_keluar_biaya->fetch_assoc();
+    $total_keluar_biaya = $row_keluar_biaya['total_keluar_biaya'] ?? 0;
+
+    $total_keluar = $total_keluar_pembelian + $total_keluar_biaya;
+
+    // Calculate the balance
+    $balance = $total_masuk - $total_keluar;
 
     // Hitung total laba/rugi
-    $total_laba_rugi = $total_pendapatan - $total_biaya;
+    $total_laba_rugi =  $balance - $total_pengeluaran;
 
     // Tentukan keterangan Laba atau Rugi
     if ($total_laba_rugi >= 0) {
@@ -89,15 +104,15 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="card-body">
                 <?php if (isset($_POST['submit'])) : ?>
-                    <?php echo "<h3 class='h3'>Total Pendapatan dari tanggal <strong> $tanggalAwal - $tanggalAkhir:</strong></h3>"; ?>
+                    <?php echo "<h3 class='h3'>Laporan Laba Rugi dari tanggal <strong> $tanggalAwal - $tanggalAkhir:</strong></h3>"; ?>
                     <table class="table table-bordered">
                         <tr>
                             <th>Total Pendapatan</th>
-                            <td>Rp <?php echo number_format($total_pendapatan, 2); ?></td>
+                            <td>Rp <?php echo number_format($balance, 2); ?></td>
                         </tr>
                         <tr>
-                            <th>Total Biaya</th>
-                            <td>Rp <?php echo number_format($total_biaya, 2); ?></td>
+                            <th>Total Biaya Pengeluaran</th>
+                            <td>Rp <?php echo number_format($total_pengeluaran, 2); ?></td>
                         </tr>
                         <tr>
                             <th>Total Laba/Rugi</th>

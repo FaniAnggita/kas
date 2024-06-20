@@ -83,7 +83,7 @@ $conn->close();
                                             <input class="form-control form-control-lg" type="password" name="password" placeholder="Masukkan Password!" />
                                         </div>
                                         <div class="d-grid gap-2 mt-3">
-                                            <input class="form-control form-control-lg" type="submit" name="submit" value="Login">
+                                            <input class="form-control form-control-lg bg-success text-white" type="submit" name="submit" value="Login">
                                         </div>
                                     </form>
                                 </div>

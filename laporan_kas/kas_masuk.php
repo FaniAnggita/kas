@@ -40,11 +40,36 @@ $result = $conn->query($sql);
 
             </div>
             <div class="card-body">
-
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <div class="form-inline">
+                            <label class="mr-2" for="min-date">Tanggal Awal:</label>
+                            <input type="text" id="min-date" class="form-control date-range-filter mr-2 mb-2">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-inline">
+                            <label class="mr-2" for="max-date">Tanggal Akhir:</label>
+                            <input type="text" id="max-date" class="form-control date-range-filter">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-inline">
+                            <label class="mr-2" for="search-bar">Pencarian:</label>
+                            <input type="text" id="search-bar" class="form-control search-bar mr-2 mb-2">
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-md-end">
+                        <div class="grid">
+                            <button class="btn btn-secondary btn-sm" id="btn-export"><i class="align-middle" data-feather="printer"></i> Cetak</button>
+                        </div>
+                    </div>
+                </div>
                 <table class="table table-striped table-bordered mt-4" id="table1">
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>Tanggal</th>
                             <th>Keterangan Transaksi</th>
                             <!-- <th>Jenis Kas</th> -->
                             <th>Harga</th>
@@ -57,6 +82,7 @@ $result = $conn->query($sql);
                         <?php while ($row = $result->fetch_assoc()) : ?>
                             <tr>
                                 <td><?php echo $no++; ?></td>
+                                <td><?php echo $row['tgl_tranksasi']; ?></td>
                                 <td><?php echo $row['keterangan_transaksi']; ?></td>
                                 <!-- <td><?php echo $row['jenis_kas']; ?></td> -->
                                 <td><?php echo isset($row['harga']) ? number_format($row['harga'], 2) : ''; ?></td>

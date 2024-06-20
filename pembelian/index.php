@@ -45,37 +45,67 @@ $suppliers = $conn->query("SELECT * FROM supplier");
                 <h5 class="card-title mb-0">Tabel Pembelian</h5>
             </div>
             <div class="card-body">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Tambah Pembelian
                 </button>
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <div class="form-inline">
+                            <label class="mr-2" for="min-date">Tanggal Awal:</label>
+                            <input type="text" id="min-date" class="form-control date-range-filter mr-2 mb-2">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-inline">
+                            <label class="mr-2" for="max-date">Tanggal Akhir:</label>
+                            <input type="text" id="max-date" class="form-control date-range-filter">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-inline">
+                            <label class="mr-2" for="search-bar">Pencarian:</label>
+                            <input type="text" id="search-bar" class="form-control search-bar mr-2 mb-2">
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-md-end">
+                        <div class="grid">
+                            <button class="btn btn-secondary btn-sm" id="btn-export"><i class="align-middle" data-feather="printer"></i> Cetak</button>
+                        </div>
+                    </div>
+                </div>
 
-
-                <table class="table table-striped table-bordered mt-4" id="table1">
-                    <tr>
-                        <th>ID</th>
-                        <th>Supplier</th>
-                        <th>Keterangan</th>
-                        <th>Tanggal Beli</th>
-                        <th>Harga</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                        <th>Aksi</th>
-                    </tr>
-                    <?php while ($row = $pembelian->fetch_assoc()) : ?>
+                <table class="table table-striped table-bordered mt-4" id="table2">
+                    <thead>
                         <tr>
-                            <td><?php echo $row['id_pembelian']; ?></td>
-                            <td><?php echo $row['nama_supplier']; ?></td>
-                            <td><?php echo $row['keterangan_pembelian']; ?></td>
-                            <td><?php echo $row['tanggal_beli']; ?></td>
-                            <td><?php echo $row['harga']; ?></td>
-                            <td><?php echo $row['quantity']; ?></td>
-                            <td><?php echo $row['quantity'] * $row['harga']; ?></td>
-                            <td>
-                                <a href="update_pembelian.php?id=<?php echo $row['id_pembelian']; ?>" class="btn btn-primary btn-sm">Edit</a>
-                                <a href="delete_pembelian.php?id=<?php echo $row['id_pembelian']; ?>" class="btn btn-danger btn-sm">Delete</a>
-                            </td>
+                            <th>ID</th>
+                            <th>Tanggal Beli</th>
+                            <th>Supplier</th>
+                            <th>Keterangan</th>
+                            <th>Harga</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Aksi</th>
                         </tr>
-                    <?php endwhile; ?>
+                    </thead>
+                    <tbody>
+                        <?php while ($row = $pembelian->fetch_assoc()) : ?>
+                            <tr>
+                                <td><?php echo $row['id_pembelian']; ?></td>
+                                <td><?php echo $row['tanggal_beli']; ?></td>
+                                <td><?php echo $row['nama_supplier']; ?></td>
+                                <td><?php echo $row['keterangan_pembelian']; ?></td>
+                                <td><?php echo $row['harga']; ?></td>
+                                <td><?php echo $row['quantity']; ?></td>
+                                <td><?php echo $row['quantity'] * $row['harga']; ?></td>
+                                <td>
+                                    <a href="update_pembelian.php?id=<?php echo $row['id_pembelian']; ?>" class="btn btn-primary btn-sm">Edit</a>
+                                    <a href="delete_pembelian.php?id=<?php echo $row['id_pembelian']; ?>" class="btn btn-danger btn-sm">Delete</a>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+
+
                 </table>
 
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

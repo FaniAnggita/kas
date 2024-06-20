@@ -12,7 +12,7 @@ include '../lib/komponen/wrap-top.php'; ?>
             </div>
             <div class="card-body">
 
-                <table class="table table-striped table-bordered mt-4" id="table1">
+                <table class="table table-striped table-bordered mt-4" id="table3">
                     <thead>
                         <tr>
                             <th>ID</th>

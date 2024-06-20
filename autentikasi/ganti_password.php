@@ -101,6 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Change Password</button>
+                                        <button type="button" class="btn btn-secondary" onclick="window.location.href='pengguna.php';">Batal</button>
                                     </form>
                                 </div>
                             </div>

@@ -44,30 +44,59 @@ $biaya = $conn->query("SELECT * FROM biaya");
                 <h5 class="card-title mb-0">Tabel Pembiayaan</h5>
             </div>
             <div class="card-body">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Tambah Pembiayaan
                 </button>
-
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <div class="form-inline">
+                            <label class="mr-2" for="min-date">Tanggal Awal:</label>
+                            <input type="text" id="min-date" class="form-control date-range-filter mr-2 mb-2">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-inline">
+                            <label class="mr-2" for="max-date">Tanggal Akhir:</label>
+                            <input type="text" id="max-date" class="form-control date-range-filter">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-inline">
+                            <label class="mr-2" for="search-bar">Pencarian:</label>
+                            <input type="text" id="search-bar" class="form-control search-bar mr-2 mb-2">
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-md-end">
+                        <div class="grid">
+                            <button class="btn btn-secondary btn-sm" id="btn-export"><i class="align-middle" data-feather="printer"></i> Cetak</button>
+                        </div>
+                    </div>
+                </div>
 
                 <table class="table table-striped table-bordered mt-4" id="table1">
-                    <tr>
-                        <th>ID</th>
-                        <th>Keterangan</th>
-                        <th>Tanggal</th>
-                        <th>Nominal</th>
-                        <th>Aksi</th>
-                    </tr>
-                    <?php while ($row = $biaya->fetch_assoc()) : ?>
+                    <thead>
                         <tr>
-                            <td><?php echo $row['id_biaya']; ?></td>
-                            <td><?php echo $row['keterangan_biaya']; ?></td>
-                            <td><?php echo $row['tgl_biaya']; ?></td>
-                            <td><?php echo $row['nominal_biaya']; ?></td>
-                            <td>
-                                <a href="update_biaya.php?id=<?php echo $row['id_biaya']; ?>" class="btn btn-primary btn-sm">Edit</a>
-                                <a href="delete_biaya.php?id=<?php echo $row['id_biaya']; ?>" class="btn btn-danger btn-sm">Delete</a>
+                            <th>ID</th>
+                            <th>Tanggal</th>
+                            <th>Keterangan</th>
+                            <th>Nominal</th>
+                            <th>Aksi</th>
                         </tr>
-                    <?php endwhile; ?>
+                    </thead>
+                    <tbody>
+                        <?php while ($row = $biaya->fetch_assoc()) : ?>
+                            <tr>
+                                <td><?php echo $row['id_biaya']; ?></td>
+                                <td><?php echo $row['tgl_biaya']; ?></td>
+                                <td><?php echo $row['keterangan_biaya']; ?></td>
+                                <td><?php echo $row['nominal_biaya']; ?></td>
+                                <td>
+                                    <a href="update_biaya.php?id=<?php echo $row['id_biaya']; ?>" class="btn btn-primary btn-sm">Edit</a>
+                                    <a href="delete_biaya.php?id=<?php echo $row['id_biaya']; ?>" class="btn btn-danger btn-sm">Delete</a>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+
                 </table>
 
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

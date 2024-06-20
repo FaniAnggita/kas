@@ -31,43 +31,35 @@ if (!isset($_SESSION['user_id'])) {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>Sistem Informasi Pencatatan Kas</title>
+    <title><?= $menu; ?></title>
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap JS (jika Anda menggunakan Bootstrap) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <!-- Buttons extension CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
+    <!-- jQuery UI CSS for Datepicker -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <style>
-        .chart-container {
-            width: 80%;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
+        .dt-top-container {
+            display: flex-end;
+            justify-content: end;
+            align-items: end;
         }
 
-        .dashboard-container {
-            width: 80%;
-            margin: 0 auto;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-        }
 
-        .stat-box {
-            display: inline-block;
-            width: 30%;
-            margin: 10px;
-            padding: 20px;
-            background-color: #f2f2f2;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            text-align: center;
-        }
 
-        .stat-box h3 {
-            margin: 10px 0;
-            font-size: 24px;
-        }
-
-        .stat-box p {
-            font-size: 18px;
+        .dataTables_wrapper .dataTables_filter,
+        .dataTables_wrapper .dataTables_length,
+        .dataTables_wrapper .dataTables_info {
+            display: none;
         }
     </style>
-
 
 </head>
 

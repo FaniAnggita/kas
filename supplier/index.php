@@ -27,31 +27,36 @@ $suppliers = $conn->query("SELECT * FROM supplier");
                 <h5 class="card-title mb-0">Tabel Supplier</h5>
             </div>
             <div class="card-body">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Tambah Supplier
                 </button>
 
 
-                <table class="table table-striped table-bordered mt-4" id="table1">
-                    <tr>
-                        <th>ID</th>
-                        <th>Nama</th>
-                        <th>No Telfon</th>
-                        <th>Alamat</th>
-                        <th>Aksi</th>
-                    </tr>
-                    <?php while ($row = $suppliers->fetch_assoc()) : ?>
+                <table class="table table-striped table-bordered mt-4">
+                    <thead>
                         <tr>
-                            <td><?php echo $row['id_supplier']; ?></td>
-                            <td><?php echo $row['nama_supplier']; ?></td>
-                            <td><?php echo $row['no_telfon']; ?></td>
-                            <td><?php echo $row['alamat']; ?></td>
-                            <td>
-                                <a href="update_supplier.php?id=<?php echo $row['id_supplier']; ?>" class="btn btn-primary btn-sm">Edit</a>
-                                <!-- <a href="delete_supplier.php?id=<?php echo $row['id_supplier']; ?>" class="btn btn-danger btn-sm">Delete</a> -->
-                            </td>
+                            <th>ID</th>
+                            <th>Nama</th>
+                            <th>No Telfon</th>
+                            <th>Alamat</th>
+                            <th>Aksi</th>
                         </tr>
-                    <?php endwhile; ?>
+                    </thead>
+                    <tbody>
+                        <?php while ($row = $suppliers->fetch_assoc()) : ?>
+                            <tr>
+                                <td><?php echo $row['id_supplier']; ?></td>
+                                <td><?php echo $row['nama_supplier']; ?></td>
+                                <td><?php echo $row['no_telfon']; ?></td>
+                                <td><?php echo $row['alamat']; ?></td>
+                                <td>
+                                    <a href="update_supplier.php?id=<?php echo $row['id_supplier']; ?>" class="btn btn-primary btn-sm">Edit</a>
+                                    <!-- <a href="delete_supplier.php?id=<?php echo $row['id_supplier']; ?>" class="btn btn-danger btn-sm">Delete</a> -->
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+
                 </table>
 
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
