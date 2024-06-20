@@ -65,33 +65,36 @@ $result = $conn->query($sql);
                         </div>
                     </div>
                 </div>
-                <table class="table table-striped table-bordered mt-4" id="table1">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Tanggal</th>
-                            <th>Keterangan Transaksi</th>
-                            <!-- <th>Jenis Kas</th> -->
-                            <th>Harga</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $no = 1; ?>
-                        <?php while ($row = $result->fetch_assoc()) : ?>
+                <div style="overflow: scroll;">
+                    <table class="table table-striped table-bordered mt-4" id="table1">
+                        <thead>
                             <tr>
-                                <td><?php echo $no++; ?></td>
-                                <td><?php echo $row['tgl_tranksasi']; ?></td>
-                                <td><?php echo $row['keterangan_transaksi']; ?></td>
-                                <!-- <td><?php echo $row['jenis_kas']; ?></td> -->
-                                <td><?php echo isset($row['harga']) ? number_format($row['harga'], 2) : ''; ?></td>
-                                <td><?php echo isset($row['quantity']) ? $row['quantity'] : ''; ?></td>
-                                <td><?php echo isset($row['total']) ? number_format($row['total'], 2) : ''; ?></td>
+                                <th>No</th>
+                                <th>Tanggal</th>
+                                <th>Keterangan Transaksi</th>
+                                <!-- <th>Jenis Kas</th> -->
+                                <th>Harga</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
                             </tr>
-                        <?php endwhile; ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php $no = 1; ?>
+                            <?php while ($row = $result->fetch_assoc()) : ?>
+                                <tr>
+                                    <td><?php echo $no++; ?></td>
+                                    <td><?php echo $row['tgl_tranksasi']; ?></td>
+                                    <td><?php echo $row['keterangan_transaksi']; ?></td>
+                                    <!-- <td><?php echo $row['jenis_kas']; ?></td> -->
+                                    <td><?php echo isset($row['harga']) ? number_format($row['harga'], 2) : ''; ?></td>
+                                    <td><?php echo isset($row['quantity']) ? $row['quantity'] : ''; ?></td>
+                                    <td><?php echo isset($row['total']) ? number_format($row['total'], 2) : ''; ?></td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                </div>
+
 
 
 

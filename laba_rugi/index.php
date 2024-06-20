@@ -105,6 +105,7 @@ if (isset($_POST['submit'])) {
             <div class="card-body">
                 <?php if (isset($_POST['submit'])) : ?>
                     <?php echo "<h3 class='h3'>Laporan Laba Rugi dari tanggal <strong> $tanggalAwal - $tanggalAkhir:</strong></h3>"; ?>
+
                     <table class="table table-bordered">
                         <tr>
                             <th>Total Pendapatan</th>

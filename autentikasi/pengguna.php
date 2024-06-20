@@ -6,46 +6,49 @@ include '../lib/komponen/wrap-top.php'; ?>
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <a href="register.php" class="btn btn-primary">
-                    Registrasi Pengguna
-                </a>
+                <?php if ($_SESSION['jabatan'] != 'owner') { ?>
+                    <a href="register.php" class="btn btn-primary">
+                        Registrasi Pengguna
+                    </a>
+                <?php } ?>
             </div>
             <div class="card-body">
+                <div style="overflow: scroll;">
+                    <table class="table table-striped table-bordered mt-4" id="table3">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nama</th>
+                                <th>Jabatan</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $sql = "SELECT * FROM pengguna"; // Query untuk mengambil data pengguna
+                            $result = $conn->query($sql);
 
-                <table class="table table-striped table-bordered mt-4" id="table3">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nama</th>
-                            <th>Jabatan</th>
-                            <th>Email</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $sql = "SELECT * FROM pengguna"; // Query untuk mengambil data pengguna
-                        $result = $conn->query($sql);
-
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                echo "<tr>";
-                                echo "<td>" . $row['id'] . "</td>";
-                                echo "<td>" . $row['nama'] . "</td>";
-                                echo "<td>" . $row['jabatan'] . "</td>";
-                                echo "<td>" . $row['email'] . "</td>";
-                                echo "</tr>";
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<tr>";
+                                    echo "<td>" . $row['id'] . "</td>";
+                                    echo "<td>" . $row['nama'] . "</td>";
+                                    echo "<td>" . $row['jabatan'] . "</td>";
+                                    echo "<td>" . $row['email'] . "</td>";
+                                    echo "</tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='4'>Tidak ada data pengguna</td></tr>";
                             }
-                        } else {
-                            echo "<tr><td colspan='4'>Tidak ada data pengguna</td></tr>";
-                        }
 
-                        $conn->close();
-                        ?>
-                    </tbody>
-                </table>
+                            $conn->close();
+                            ?>
+                        </tbody>
+                    </table>
 
 
 
+                </div>
             </div>
         </div>
     </div>

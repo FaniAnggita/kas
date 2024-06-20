@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_pembelian'])) {
                     </div>
                     <div class="mb-3">
                         <label for="quantity" class="form-label">Quantity:</label>
-                        <input type="number" name="quantity" id="quantity" value="<?php echo $pembelian['quantity']; ?>" class="form-control" required>
+                        <input type="number" name="quantity" id="quantity" value="<?php echo $pembelian['quantity']; ?>" min="1" class="form-control" required>
                     </div>
                     <div class="d-flex justify-content-between">
                         <button type="submit" name="update_pembelian" class="btn btn-primary">Update</button>

@@ -55,54 +55,56 @@ $saldo = 0;
                         </div>
                     </div>
                 </div>
-
-                <table class="table table-striped table-bordered mt-4" id="table1">
-                    <thead>
-                        <tr class="text-center">
-                            <th>No</th>
-                            <th>Tanggal</th>
-                            <th>Keterangan Transaksi</th>
-                            <th>Debit</th>
-                            <th>Kredit</th>
-                            <th>Saldo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $no = 1; ?>
-                        <?php while ($row = $result->fetch_assoc()) : ?>
-                            <tr>
-                                <td><?php echo $no++; ?></td>
-                                <td><?php echo $row['tgl_tranksasi']; ?></td>
-                                <td><?php echo $row['keterangan_transaksi']; ?></td>
-                                <td>
-                                    <?php
-                                    if ($row['jenis_kas'] == 'masuk') {
-                                        $debit = $row['total'] ?? 0;
-                                        $kredit = 0;
-                                        $saldo += $debit;
-                                        echo number_format($debit, 2);
-                                    } else {
-                                        echo "";
-                                    }
-                                    ?>
-                                </td>
-                                <td>
-                                    <?php
-                                    if ($row['jenis_kas'] == 'keluar') {
-                                        $kredit = $row['total'] ?? 0;
-                                        $debit = 0;
-                                        $saldo -= $kredit;
-                                        echo number_format($kredit, 2);
-                                    } else {
-                                        echo "";
-                                    }
-                                    ?>
-                                </td>
-                                <td><?php echo number_format($saldo, 2); ?></td>
+                <div style="overflow: scroll;">
+                    <table class="table table-striped table-bordered mt-4" id="table1">
+                        <thead>
+                            <tr class="text-center">
+                                <th>No</th>
+                                <th>Tanggal</th>
+                                <th>Keterangan Transaksi</th>
+                                <th>Debit</th>
+                                <th>Kredit</th>
+                                <th>Saldo</th>
                             </tr>
-                        <?php endwhile; ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php $no = 1; ?>
+                            <?php while ($row = $result->fetch_assoc()) : ?>
+                                <tr>
+                                    <td><?php echo $no++; ?></td>
+                                    <td><?php echo $row['tgl_tranksasi']; ?></td>
+                                    <td><?php echo $row['keterangan_transaksi']; ?></td>
+                                    <td>
+                                        <?php
+                                        if ($row['jenis_kas'] == 'masuk') {
+                                            $debit = $row['total'] ?? 0;
+                                            $kredit = 0;
+                                            $saldo += $debit;
+                                            echo number_format($debit, 2);
+                                        } else {
+                                            echo "";
+                                        }
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        if ($row['jenis_kas'] == 'keluar') {
+                                            $kredit = $row['total'] ?? 0;
+                                            $debit = 0;
+                                            $saldo -= $kredit;
+                                            echo number_format($kredit, 2);
+                                        } else {
+                                            echo "";
+                                        }
+                                        ?>
+                                    </td>
+                                    <td><?php echo number_format($saldo, 2); ?></td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+
+                </div>
 
 
 

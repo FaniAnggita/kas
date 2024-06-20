@@ -44,9 +44,11 @@ $biaya = $conn->query("SELECT * FROM biaya");
                 <h5 class="card-title mb-0">Tabel Pembiayaan</h5>
             </div>
             <div class="card-body">
-                <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Tambah Pembiayaan
-                </button>
+                <?php if ($_SESSION['jabatan'] != 'owner') { ?>
+                    <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Tambah Pembiayaan
+                    </button>
+                <?php } ?>
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <div class="form-inline">
@@ -72,32 +74,35 @@ $biaya = $conn->query("SELECT * FROM biaya");
                         </div>
                     </div>
                 </div>
-
-                <table class="table table-striped table-bordered mt-4" id="table1">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Tanggal</th>
-                            <th>Keterangan</th>
-                            <th>Nominal</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php while ($row = $biaya->fetch_assoc()) : ?>
+                <div style="overflow: scroll;">
+                    <table class="table table-striped table-bordered mt-4" id="table1">
+                        <thead>
                             <tr>
-                                <td><?php echo $row['id_biaya']; ?></td>
-                                <td><?php echo $row['tgl_biaya']; ?></td>
-                                <td><?php echo $row['keterangan_biaya']; ?></td>
-                                <td><?php echo $row['nominal_biaya']; ?></td>
-                                <td>
-                                    <a href="update_biaya.php?id=<?php echo $row['id_biaya']; ?>" class="btn btn-primary btn-sm">Edit</a>
-                                    <a href="delete_biaya.php?id=<?php echo $row['id_biaya']; ?>" class="btn btn-danger btn-sm">Delete</a>
+                                <th>ID</th>
+                                <th>Tanggal</th>
+                                <th>Keterangan</th>
+                                <th>Nominal</th>
+                                <th>Aksi</th>
                             </tr>
-                        <?php endwhile; ?>
-                    </tbody>
+                        </thead>
+                        <tbody>
+                            <?php while ($row = $biaya->fetch_assoc()) : ?>
+                                <tr>
+                                    <td><?php echo $row['id_biaya']; ?></td>
+                                    <td><?php echo $row['tgl_biaya']; ?></td>
+                                    <td><?php echo $row['keterangan_biaya']; ?></td>
+                                    <td><?php echo $row['nominal_biaya']; ?></td>
+                                    <td>
+                                        <a href="update_biaya.php?id=<?php echo $row['id_biaya']; ?>" class="btn btn-primary btn-sm">Edit</a>
+                                        <a href="delete_biaya.php?id=<?php echo $row['id_biaya']; ?>" class="btn btn-danger btn-sm">Delete</a>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
 
-                </table>
+                    </table>
+                </div>
+
+
 
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -131,9 +136,6 @@ $biaya = $conn->query("SELECT * FROM biaya");
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
     </div>
