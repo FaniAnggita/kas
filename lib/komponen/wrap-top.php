@@ -45,6 +45,7 @@ if (!isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
     <!-- jQuery UI CSS for Datepicker -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .dt-top-container {
             display: flex-end;
@@ -60,7 +61,33 @@ if (!isset($_SESSION['user_id'])) {
             display: none;
         }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteButtons = document.querySelectorAll('.delete-btn');
 
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const url = this.getAttribute('data-url');
+
+                    Swal.fire({
+                        title: 'Apakah Anda yakin?',
+                        text: "Data yang dihapus tidak dapat dikembalikan!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Ya, hapus!',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = url;
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -83,6 +110,11 @@ if (!isset($_SESSION['user_id'])) {
                         </a>
                     </li>
 
+                    <li class="sidebar-item <?php echo $menu === 'barang' ? 'active' : ''; ?>">
+                        <a class="sidebar-link" href="../barang">
+                            <i class="align-middle" data-feather="archive"></i> <span class="align-middle">Barang</span>
+                        </a>
+                    </li>
                     <li class="sidebar-item <?php echo $menu === 'pembelian' ? 'active' : ''; ?>">
                         <a class="sidebar-link" href="../pembelian">
                             <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Pembelian</span>

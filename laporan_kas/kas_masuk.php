@@ -65,7 +65,7 @@ $result = $conn->query($sql);
                         </div>
                     </div>
                 </div>
-                <div style="overflow: scroll;">
+                <div style="overflow-x: scroll;">
                     <table class="table table-striped table-bordered mt-4" id="table1">
                         <thead>
                             <tr>

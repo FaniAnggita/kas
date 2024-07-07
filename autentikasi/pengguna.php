@@ -13,7 +13,7 @@ include '../lib/komponen/wrap-top.php'; ?>
                 <?php } ?>
             </div>
             <div class="card-body">
-                <div style="overflow: scroll;">
+                <div style="overflow-x: scroll;">
                     <table class="table table-striped table-bordered mt-4" id="table3">
                         <thead>
                             <tr>

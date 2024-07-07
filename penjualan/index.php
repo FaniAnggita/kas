@@ -21,7 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_penjualan'])) {
 
         $sql_kas = "INSERT INTO kas (id_penjualan, keterangan_transaksi, jenis_kas, tgl_tranksasi) VALUES ('$last_id', '$keterangan_transaksi', '$jenis_kas', '$tgl_transaksi')";
         if ($conn->query($sql_kas) === TRUE) {
-            echo "<script>alert('Data berhasil ditambahkan!')</script>";
+            echo "<script>Swal.fire({
+                title: 'Data Berhasil Ditambahkan!',
+                icon: 'success',
+                confirmButtonText: 'Tutup'
+                })</script>";
         } else {
             echo "Error: " . $sql_kas . "<br>" . $conn->error;
         }
@@ -77,18 +81,19 @@ $penjualan = $conn->query("SELECT * FROM penjualan");
                         </div>
                     </div>
                 </div>
-                <div style="overflow: scroll;">
+                <div style="overflow-x: scroll;">
                     <table class="table table-striped table-bordered mt-4" id="table2">
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Tanggal Jual</th>
                                 <th>Keterangan</th>
-
                                 <th>Harga</th>
                                 <th>Quantity</th>
                                 <th>Total</th>
-                                <th>Aksi</th>
+                                <?php if ($_SESSION['jabatan'] != 'owner') { ?>
+                                    <th>Aksi</th>
+                                <?php } ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -98,13 +103,16 @@ $penjualan = $conn->query("SELECT * FROM penjualan");
                                     <td><?php echo $row['tgl_jual']; ?></td>
                                     <td><?php echo $row['keterangan_penjualan']; ?></td>
 
-                                    <td><?php echo $row['harga']; ?></td>
+                                    <td class="text-end"><?php echo number_format($row['harga'], 2); ?></td>
                                     <td><?php echo $row['quantity']; ?></td>
-                                    <td><?php echo $row['quantity'] * $row['harga']; ?></td>
-                                    <td>
-                                        <a href="update_penjualan.php?id=<?php echo $row['id_penjualan']; ?>" class="btn btn-primary btn-sm">Edit</a>
-                                        <a href="delete_penjualan.php?id=<?php echo $row['id_penjualan']; ?>" class="btn btn-danger btn-sm">Delete</a>
-                                    </td>
+                                    <td><?php echo number_format($row['quantity'] * $row['harga'], 2); ?></td>
+
+                                    <?php if ($_SESSION['jabatan'] != 'owner') { ?>
+                                        <td class="text-end">
+                                            <a href="update_penjualan.php?id=<?php echo $row['id_penjualan']; ?>" class="btn btn-primary btn-sm">Edit</a>
+                                            <a href="delete_penjualan.php?id=<?php echo $row['id_penjualan']; ?>" class="btn btn-danger btn-sm delete-btn" data-url="delete_penjualan.php?id=<?php echo $row['id_penjualan']; ?>">Delete</a>
+                                        </td>
+                                    <?php } ?>
                                 </tr>
                             <?php endwhile; ?>
                         </tbody>

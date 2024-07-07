@@ -55,7 +55,7 @@ $saldo = 0;
                         </div>
                     </div>
                 </div>
-                <div style="overflow: scroll;">
+                <div style="overflow-x: scroll;">
                     <table class="table table-striped table-bordered mt-4" id="table1">
                         <thead>
                             <tr class="text-center">
@@ -74,7 +74,7 @@ $saldo = 0;
                                     <td><?php echo $no++; ?></td>
                                     <td><?php echo $row['tgl_tranksasi']; ?></td>
                                     <td><?php echo $row['keterangan_transaksi']; ?></td>
-                                    <td>
+                                    <td class="text-end">
                                         <?php
                                         if ($row['jenis_kas'] == 'masuk') {
                                             $debit = $row['total'] ?? 0;
@@ -86,7 +86,7 @@ $saldo = 0;
                                         }
                                         ?>
                                     </td>
-                                    <td>
+                                    <td class="text-end">
                                         <?php
                                         if ($row['jenis_kas'] == 'keluar') {
                                             $kredit = $row['total'] ?? 0;
@@ -98,7 +98,7 @@ $saldo = 0;
                                         }
                                         ?>
                                     </td>
-                                    <td><?php echo number_format($saldo, 2); ?></td>
+                                    <td class="text-end"><?php echo number_format($saldo, 2); ?></td>
                                 </tr>
                             <?php endwhile; ?>
                         </tbody>

@@ -9,7 +9,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_supplier'])) {
 
     $sql = "INSERT INTO supplier (nama_supplier, no_telfon, alamat) VALUES ('$nama', '$telp', '$alamat')";
     if ($conn->query($sql) === TRUE) {
-        echo "<script>alert('Data berhasil ditambahkan!')</script>";
+        echo "<script>Swal.fire({
+            title: 'Data Berhasil Ditambahkan!',
+            icon: 'success',
+            confirmButtonText: 'Tutup'
+            })</script>";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
@@ -32,7 +36,7 @@ $suppliers = $conn->query("SELECT * FROM supplier");
                         Tambah Supplier
                     </button>
                 <?php } ?>
-                <div style="overflow: scroll;">
+                <div style="overflow-x: scroll;">
                     <table class="table table-striped table-bordered mt-4">
                         <thead>
                             <tr>
@@ -40,7 +44,9 @@ $suppliers = $conn->query("SELECT * FROM supplier");
                                 <th>Nama</th>
                                 <th>No Telfon</th>
                                 <th>Alamat</th>
-                                <th>Aksi</th>
+                                <?php if ($_SESSION['jabatan'] != 'owner') { ?>
+                                    <th>Aksi</th>
+                                <?php } ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,10 +56,13 @@ $suppliers = $conn->query("SELECT * FROM supplier");
                                     <td><?php echo $row['nama_supplier']; ?></td>
                                     <td><?php echo $row['no_telfon']; ?></td>
                                     <td><?php echo $row['alamat']; ?></td>
-                                    <td>
-                                        <a href="update_supplier.php?id=<?php echo $row['id_supplier']; ?>" class="btn btn-primary btn-sm">Edit</a>
-                                        <!-- <a href="delete_supplier.php?id=<?php echo $row['id_supplier']; ?>" class="btn btn-danger btn-sm">Delete</a> -->
-                                    </td>
+
+                                    <?php if ($_SESSION['jabatan'] != 'owner') { ?>
+                                        <td>
+                                            <a href="update_supplier.php?id=<?php echo $row['id_supplier']; ?>" class="btn btn-primary btn-sm">Edit</a>
+                                            <!-- <a href="delete_supplier.php?id=<?php echo $row['id_supplier']; ?>" class="btn btn-danger btn-sm">Delete</a> -->
+                                        </td>
+                                    <?php } ?>
                                 </tr>
                             <?php endwhile; ?>
                         </tbody>
@@ -73,21 +82,21 @@ $suppliers = $conn->query("SELECT * FROM supplier");
                             <div class="modal-body">
                                 <div class="container">
 
-                                    <form method="post" action="" class="needs-validation" novalidate>
+                                    <form method="post" action="">
                                         <div class="mb-3">
                                             <label for="nama_supplier" class="form-label">Nama Supplier:</label>
                                             <input type="text" name="nama_supplier" id="nama_supplier" class="form-control" required>
-                                            <div class="invalid-feedback">Nama supplier harus diisi.</div>
+
                                         </div>
                                         <div class="mb-3">
                                             <label for="no_telfon" class="form-label">No Telfon:</label>
                                             <input type="text" name="no_telfon" id="no_telfon" class="form-control" required>
-                                            <div class="invalid-feedback">No telfon harus diisi.</div>
+
                                         </div>
                                         <div class="mb-3">
                                             <label for="alamat" class="form-label">Alamat:</label>
                                             <textarea name="alamat" id="alamat" class="form-control" required></textarea>
-                                            <div class="invalid-feedback">Alamat harus diisi.</div>
+
                                         </div>
                                         <div class="text-end">
                                             <button type="submit" name="add_supplier" class="btn btn-primary">Tambah</button>

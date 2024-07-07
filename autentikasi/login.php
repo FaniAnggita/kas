@@ -1,6 +1,7 @@
 <?php
 session_start();
 include '../config.php'; // Sambungkan ke file konfigurasi database
+$message = '';
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -22,15 +23,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
             header("Location: ../dashboard/index.php");
             exit();
         } else {
-            echo "<script>alert('Password salah!')</script>";
+            $message = 'Password salah!';
         }
     } else {
-        echo "<script>alert('Pengguna tidak ditemukan!')</script>";
+        $message = 'Pengguna tidak ditemukan!';
     }
+
+    $conn->close();
 }
-
-
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -76,11 +76,11 @@ $conn->close();
 
                                         <div class="mb-3">
                                             <label class="form-label">Email</label>
-                                            <input class="form-control form-control-lg" type="email" name="email" placeholder="Masukkan Email!" />
+                                            <input class="form-control form-control-lg" type="email" name="email" placeholder="Masukkan Email!" required />
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Password</label>
-                                            <input class="form-control form-control-lg" type="password" name="password" placeholder="Masukkan Password!" />
+                                            <input class="form-control form-control-lg" type="password" name="password" placeholder="Masukkan Password!" required />
                                         </div>
                                         <div class="d-grid gap-2 mt-3">
                                             <input class="form-control form-control-lg bg-success text-white" type="submit" name="submit" value="Login">
@@ -97,7 +97,17 @@ $conn->close();
     </main>
 
     <script src="../lib/js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script>
+        <?php if ($message != '') : ?>
+            Swal.fire({
+                title: '<?= $message ?>',
+                icon: 'error',
+                confirmButtonText: 'Tutup'
+            });
+        <?php endif; ?>
+    </script>
 </body>
 
 </html>

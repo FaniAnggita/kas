@@ -23,8 +23,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_biaya'])) {
 
         $sql_kas = "UPDATE kas SET keterangan_transaksi = '$keterangan_transaksi', jenis_kas = '$jenis_kas', tgl_tranksasi = '$tgl_transaksi' WHERE id_biaya = $id";
         if ($conn->query($sql_kas) === TRUE) {
-            echo "<script>alert('Data berhasil diperbarui')</script>";
-            echo "<script>window.location.href='index.php'</script>";
+            echo "<script>
+            Swal.fire({
+                title: 'Data Berhasil Diperbarui!',
+                icon: 'success',
+                confirmButtonText: 'Tutup'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = 'index.php';
+                }
+            });
+        </script>";
         } else {
             echo "Error: " . $sql_kas . "<br>" . $conn->error;
         }

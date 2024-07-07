@@ -77,26 +77,26 @@ if (isset($_POST['submit'])) {
                 <form action="" method="POST">
                     <div class="form-group">
                         <label for="tanggalAwal">Tanggal Awal:</label>
-                        <input type="date" class="form-control" id="tanggalAwal" name="tanggalAwal" required>
+                        <input type="date" class="form-control mb-3" id="tanggalAwal" name="tanggalAwal" required>
                     </div>
                     <div class="form-group">
                         <label for="tanggalAkhir">Tanggal Akhir:</label>
-                        <input type="date" class="form-control" id="tanggalAkhir" name="tanggalAkhir" required>
+                        <input type="date" class="form-control mb-3" id="tanggalAkhir" name="tanggalAkhir" required>
                     </div>
                     <div class="form-group">
                         <label for="totalGaji">Total Gaji:</label>
-                        <input type="text" class="form-control" id="totalGaji" name="totalGaji" required>
+                        <input type="text" class="form-control mb-3" id="totalGaji" name="totalGaji" required>
                     </div>
                     <div class="form-group">
                         <label for="totalListrikAir">Total Listrik & Air:</label>
-                        <input type="text" class="form-control" id="totalListrikAir" name="totalListrikAir" required>
+                        <input type="text" class="form-control mb-3" id="totalListrikAir" name="totalListrikAir" required>
                     </div>
                     <div class="form-group">
                         <label for="totalOngkosBarang">Total Ongkos Barang:</label>
                         <input type="text" class="form-control" id="totalOngkosBarang" name="totalOngkosBarang" required>
                     </div>
 
-                    <button type="submit" name="submit" class="btn btn-primary">Buat Laporan</button>
+                    <button type="submit" name="submit" class="btn btn-primary mt-4">Buat Laporan</button>
                 </form>
 
 

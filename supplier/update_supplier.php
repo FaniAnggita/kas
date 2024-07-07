@@ -14,8 +14,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_supplier'])) {
 
     $sql = "UPDATE supplier SET nama_supplier = '$nama', no_telfon = '$telp', alamat = '$alamat' WHERE id_supplier = $id";
     if ($conn->query($sql) === TRUE) {
-        echo "<script>alert('Data berhasil diperbarui')</script>";
-        echo "<script>window.location.href='index.php'</script>";
+        echo "<script>
+        Swal.fire({
+            title: 'Data Berhasil Diperbarui!',
+            icon: 'success',
+            confirmButtonText: 'Tutup'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = 'index.php';
+            }
+        });
+    </script>";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
