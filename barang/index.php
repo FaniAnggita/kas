@@ -87,7 +87,7 @@ $barang = $conn->query("SELECT * FROM barang");
                                     <?php if ($_SESSION['jabatan'] != 'owner') { ?>
                                         <td>
                                             <a href="update_barang.php?id=<?php echo $row['kode_barang']; ?>" class="btn btn-primary btn-sm">Edit</a>
-                                            <a href="delete_barang.php?id=<?php echo $row['kode_barang']; ?>" class="btn btn-danger btn-sm delete-btn" data-url="delete_barang.php?id=<?php echo $row['kode_barang']; ?>">Delete</a>
+                                            <!-- <a href="delete_barang.php?id=<?php echo $row['kode_barang']; ?>" class="btn btn-danger btn-sm delete-btn" data-url="delete_barang.php?id=<?php echo $row['kode_barang']; ?>">Delete</a> -->
                                         </td>
                                     <?php } ?>
                                 </tr>

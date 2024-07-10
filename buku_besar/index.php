@@ -6,6 +6,8 @@ include '../lib/komponen/wrap-top.php'; ?>
 $sql = "SELECT k.id_kas_masuk, 
                k.keterangan_transaksi, 
                k.jenis_kas, 
+                 br.kode_barang,
+                 br.nama_barang,
                k.tgl_tranksasi, 
                COALESCE(p.harga, pe.harga, b.nominal_biaya) AS harga,
                COALESCE(p.quantity, pe.quantity, b.quantity) AS quantity,
@@ -14,6 +16,7 @@ $sql = "SELECT k.id_kas_masuk,
         LEFT JOIN penjualan p ON k.id_penjualan = p.id_penjualan
         LEFT JOIN pembelian pe ON k.id_pembelian = pe.id_pembelian
         LEFT JOIN biaya b ON k.id_biaya = b.id_biaya
+          LEFT JOIN barang br ON br.kode_barang = k.keterangan_transaksi
         ORDER BY k.tgl_tranksasi ASC";
 
 $result = $conn->query($sql);
@@ -61,7 +64,8 @@ $saldo = 0;
                             <tr class="text-center">
                                 <th>No</th>
                                 <th>Tanggal</th>
-                                <th>Keterangan Transaksi</th>
+                                <th>Kode Barang</th>
+                                <th>Nama Barang</th>
                                 <th>Debit</th>
                                 <th>Kredit</th>
                                 <th>Saldo</th>
@@ -73,7 +77,8 @@ $saldo = 0;
                                 <tr>
                                     <td><?php echo $no++; ?></td>
                                     <td><?php echo $row['tgl_tranksasi']; ?></td>
-                                    <td><?php echo $row['keterangan_transaksi']; ?></td>
+                                    <td><?php echo $row['kode_barang']; ?></td>
+                                    <td><?php echo $row['nama_barang'] == '' ? $row['keterangan_transaksi'] : $row['nama_barang']; ?></td>
                                     <td class="text-end">
                                         <?php
                                         if ($row['jenis_kas'] == 'masuk') {

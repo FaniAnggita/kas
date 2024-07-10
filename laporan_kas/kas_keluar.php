@@ -6,6 +6,9 @@ include '../lib/komponen/wrap-top.php'; ?>
 $sql = "SELECT k.id_kas_masuk, 
                k.keterangan_transaksi, 
                k.jenis_kas, 
+                br.kode_barang,
+                pe.kode_beli,
+                br.nama_barang,
                k.tgl_tranksasi, 
                CASE 
                     WHEN k.jenis_kas = 'masuk' THEN p.harga
@@ -26,6 +29,7 @@ $sql = "SELECT k.id_kas_masuk,
         LEFT JOIN penjualan p ON k.id_penjualan = p.id_penjualan
         LEFT JOIN pembelian pe ON k.id_pembelian = pe.id_pembelian
         LEFT JOIN biaya b ON k.id_biaya = b.id_biaya
+          LEFT JOIN barang br ON br.kode_barang = k.keterangan_transaksi
         WHERE k .jenis_kas = 'keluar'
         ORDER BY k.tgl_tranksasi DESC";
 
@@ -71,7 +75,9 @@ $result = $conn->query($sql);
                             <tr>
                                 <th>No</th>
                                 <th>Tanggal</th>
-                                <th>Keterangan Transaksi</th>
+                                <th>Kode Pembelian</th>
+                                <th>Kode Barang</th>
+                                <th>Nama Barang</th>
                                 <!-- <th>Jenis Kas</th> -->
                                 <th>Harga</th>
                                 <th>Quantity</th>
@@ -84,7 +90,10 @@ $result = $conn->query($sql);
                                 <tr>
                                     <td><?php echo $no++; ?></td>
                                     <td><?php echo $row['tgl_tranksasi']; ?></td>
-                                    <td><?php echo $row['keterangan_transaksi']; ?></td>
+                                    <td><?php echo $row['kode_beli']; ?></td>
+                                    <td><?php echo $row['kode_barang']; ?></td>
+                                    <td><?php echo $row['nama_barang'] == '' ? $row['keterangan_transaksi'] : $row['nama_barang']; ?></td>
+
                                     <!-- <td><?php echo $row['jenis_kas']; ?></td> -->
                                     <td class="text-end"><?php echo isset($row['harga']) ? number_format($row['harga'], 2) : ''; ?></td>
                                     <td><?php echo isset($row['quantity']) ? $row['quantity'] : ''; ?></td>
