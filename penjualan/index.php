@@ -74,7 +74,7 @@ if (isset($_POST['btn-pilih-barang'])) {
 }
 ?>
 
-<h1 class="h3 mb-3">Penjualan</h1>
+<h1 class="h3 mb-3 text-white">Penjualan</h1>
 <div class="row">
     <div class="col-12">
         <div class="card">

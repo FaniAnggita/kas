@@ -36,7 +36,7 @@ $sql = "SELECT k.id_kas_masuk,
 $result = $conn->query($sql);
 ?>
 
-<h1 class="h3 mb-3">Laporan Kas Keluar</h1>
+<h1 class="h3 mb-3 text-white">Laporan Kas Keluar</h1>
 <div class="row">
     <div class="col-12">
         <div class="card">

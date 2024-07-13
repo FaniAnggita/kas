@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_biaya'])) {
 
 
 
-<h1 class="h3 mb-3">Edit Pembiayaan</h1>
+<h1 class="h3 mb-3 text-white">Edit Pembiayaan</h1>
 <div class="row">
     <div class="col-12">
         <div class="card">

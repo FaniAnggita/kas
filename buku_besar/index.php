@@ -25,7 +25,7 @@ $result = $conn->query($sql);
 $saldo = 0;
 ?>
 
-<h1 class="h3 mb-3">Laporan Buku Besar</h1>
+<h1 class="h3 mb-3 text-white">Laporan Buku Besar</h1>
 <div class="row">
     <div class="col-12">
         <div class="card">

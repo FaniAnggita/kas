@@ -26,7 +26,7 @@ $barang = $conn->query("SELECT * FROM barang");
 ?>
 
 
-<h1 class="h3 mb-3">Barang</h1>
+<h1 class="h3 mb-3 text-white">Barang</h1>
 <div class="row">
     <div class="col-12">
         <div class="card">

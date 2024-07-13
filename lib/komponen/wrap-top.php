@@ -47,6 +47,13 @@ if (!isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
+        #set-bg {
+            background-image: url('../lib/komponen/bg.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
         .dt-top-container {
             display: flex-end;
             justify-content: end;
@@ -91,12 +98,12 @@ if (!isset($_SESSION['user_id'])) {
 </head>
 
 <body>
-    <div class="wrapper">
+    <div class="wrapper" style="background-color: red;">
         <!-- Sidebar -->
         <nav id="sidebar" class="sidebar js-sidebar">
             <div class="sidebar-content js-simplebar">
                 <a class="sidebar-brand" href="index.html">
-                    <span class="align-middle">Sistem Informasi Pencatatan Kas</span>
+                    <!-- <span class="align-middle">Sistem Informasi Pencatatan Kas</span> -->
                 </a>
 
                 <ul class="sidebar-nav">
@@ -195,7 +202,9 @@ if (!isset($_SESSION['user_id'])) {
                 <a class="sidebar-toggle js-sidebar-toggle">
                     <i class="hamburger align-self-center"></i>
                 </a>
-
+                <div>
+                    <h3 class="text-dark mt-2">Sistem Informasi Pencatatan Kas Amelia</h3>
+                </div>
                 <div class="navbar-collapse collapse">
                     <ul class="navbar-nav navbar-align">
 
@@ -220,5 +229,5 @@ if (!isset($_SESSION['user_id'])) {
             </nav>
             <!-- end top bar -->
 
-            <main class="content">
+            <main class="content" id="set-bg">
                 <div class="container-fluid p-0">

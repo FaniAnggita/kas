@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_supplier'])) {
 $suppliers = $conn->query("SELECT * FROM supplier");
 ?>
 
-<h1 class="h3 mb-3">Supplier</h1>
+<h1 class="h3 mb-3 text-white">Supplier</h1>
 <div class="row">
     <div class="col-12">
         <div class="card">

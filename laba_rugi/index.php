@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
 ?>
 
 
-<h1 class="h3 mb-3">Laporan Laba Rugi</h1>
+<h1 class="h3 mb-3 text-white">Laporan Laba Rugi</h1>
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -80,15 +80,20 @@ if (isset($_POST['submit'])) {
                 <?php if (isset($_POST['submit'])) : ?>
                     <?php echo "<h3 class='h3'>Laporan Laba Rugi dari tanggal <strong>$tanggalAwal - $tanggalAkhir:</strong></h3>"; ?>
 
-                    <h4>Pemasukan:</h4>
-                    <table class="table table-bordered">
-                        <!-- <thead>
+                    <table class="table">
+                        <thead>
                             <tr>
                                 <th>Keterangan</th>
-                                <th>Harga</th>
+                                <th>Nilai</th>
                             </tr>
-                        </thead> -->
+                        </thead>
                         <tbody>
+                            <tr>
+                                <td>
+                                    <h4>Pemasukan:</h4>
+                                </td>
+                                <td></td>
+                            </tr>
                             <!-- <?php foreach ($kas_masuk_list as $item) : ?>
                                 <tr>
                                     <td><?php echo $item['nama']; ?></td>
@@ -99,44 +104,37 @@ if (isset($_POST['submit'])) {
                                 <th>Total Pendapatan</th>
                                 <td>Rp <?php echo number_format($total_kas_masuk, 2); ?></td>
                             </tr>
-                        </tbody>
-                    </table>
-
-                    <h4>Pengeluaran:</h4>
-                    <table class="table table-bordered">
-                        <!-- <thead>
                             <tr>
-                                <th>Keterangan</th>
-                                <th>Harga</th>
+                                <td>
+                                    <h4>Pengeluaran:</h4>
+                                </td>
+                                <td></td>
                             </tr>
-                        </thead> -->
-                        <tbody>
                             <?php foreach ($kas_keluar_list as $item) : ?>
                                 <tr>
                                     <td><?php echo $item['nama']; ?></td>
                                     <td>Rp <?php echo number_format($item['harga'], 2); ?></td>
                                 </tr>
                             <?php endforeach; ?>
-                            <!-- <tr>
+                            <tr>
                                 <th>Total Biaya Pengeluaran</th>
                                 <td>Rp <?php echo number_format($total_kas_keluar, 2); ?></td>
-                            </tr> -->
+                            </tr>
+                            <tr>
+                                <th>Laba/Rugi</th>
+                                <td>Rp <?php echo number_format($balance, 2); ?></td>
+                            </tr>
+                            <!-- Jika perlu ditambahkan keterangan -->
+                            <!-- <tr>
+                    <th>Keterangan</th>
+                    <td><?php echo "<b>" . $keterangan . "</b>"; ?></td>
+                </tr> -->
                         </tbody>
                     </table>
 
-                    <!-- <h4>Laba/Rugi</h4> -->
-                    <table class="table table-bordered">
-                        <tr>
-                            <th>Laba/Rugi</th>
-                            <td>Rp <?php echo number_format($balance, 2); ?></td>
-                        </tr>
-                        <!-- <tr>
-                            <th>Keterangan</th>
-                            <td><?php echo "<b>" . $keterangan . "</b>";  ?></td>
-                        </tr> -->
-                    </table>
                 <?php endif; ?>
             </div>
+
         </div>
     </div>
 </div>

@@ -53,18 +53,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
     <link href="../lib/css/app.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        #set-bg {
+            background-image: url('../lib/komponen/bg.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 </head>
 
-<body>
+<body id="set-bg">
     <main class="d-flex w-100">
         <div class="container d-flex flex-column">
             <div class="row vh-100">
                 <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto d-table h-100">
                     <div class="d-table-cell align-middle">
 
-                        <div class="text-center mt-4">
-                            <h1 class="h2">Selamat Datang</h1>
-                            <p class="lead">
+                        <div class="text-center mt-4 ">
+                            <h1 class="h2 text-white">Selamat Datang</h1>
+                            <p class="lead text-white">
                                 Sistem Informasi Pencatatan Kas
                             </p>
                         </div>

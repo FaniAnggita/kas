@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_penjualan'])) {
 
 
 
-<h1 class="h3 mb-3">Edit Penjualan</h1>
+<h1 class="h3 mb-3 text-white">Edit Penjualan</h1>
 <div class="row">
     <div class="col-12">
         <div class="card">

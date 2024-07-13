@@ -70,11 +70,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <link href="../lib/css/app.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        #set-bg {
+            background-image: url('../lib/komponen/bg.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 </head>
 
 <body>
     <main class="d-flex w-100">
-        <div class="container d-flex flex-column">
+        <div class="container d-flex flex-column" id="#set-bg">
             <div class="row vh-100">
                 <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto d-table h-100">
                     <div class="d-table-cell align-middle">

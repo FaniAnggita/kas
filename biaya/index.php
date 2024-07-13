@@ -40,7 +40,7 @@ $biaya = $conn->query("SELECT * FROM biaya");
 
 
 
-<h1 class="h3 mb-3">Pembiayaan</h1>
+<h1 class="h3 mb-3 text-white">Pembiayaan</h1>
 <div class="row">
     <div class="col-12">
         <div class="card">
